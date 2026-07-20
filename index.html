@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#352f44" />
+  <meta name="description" content="Explora libros, ideas y perspectivas mediante rutas de lectura personalizadas." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Rutas de Lectura</title>
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Exploración del conocimiento</p>
+      <h1>Rutas de Lectura</h1>
+      <p>Parte de un libro, elige una idea y descubre nuevas perspectivas.</p>
+    </div>
+    <button id="installBtn" class="secondary hidden">Instalar app</button>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>1. Elige tu libro de partida</h2>
+      <label for="bookSelect">Libro</label>
+      <select id="bookSelect"></select>
+
+      <div id="bookSummary" class="book-summary"></div>
+    </section>
+
+    <section class="panel">
+      <h2>2. ¿Qué tema quieres profundizar?</h2>
+      <div id="topicButtons" class="chips"></div>
+
+      <label for="approachSelect">Enfoque de lectura</label>
+      <select id="approachSelect">
+        <option value="todos">Todos los enfoques</option>
+        <option value="ensayo">Ensayo</option>
+        <option value="academico">Académico</option>
+        <option value="novela-historica">Novela histórica</option>
+        <option value="ficcion">Ficción</option>
+        <option value="ciencia-ficcion">Ciencia ficción</option>
+        <option value="biografia">Biografía</option>
+      </select>
+
+      <button id="exploreBtn" class="primary">Crear mi ruta</button>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Ruta personalizada</p>
+          <h2>3. Recomendaciones</h2>
+        </div>
+        <button id="refreshBtn" class="secondary">Nueva ruta</button>
+      </div>
+      <div id="recommendations" class="cards">
+        <p class="empty">Selecciona un libro y un tema para comenzar.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Mi recorrido</h2>
+      <div id="savedRoutes" class="saved-list"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Prototipo inicial. Los datos se guardan solamente en este dispositivo.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
