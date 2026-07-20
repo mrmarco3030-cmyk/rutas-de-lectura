@@ -1,0 +1,1272 @@
+[
+  {
+    "id": "1984",
+    "title": "1984",
+    "author": "George Orwell",
+    "year": 1949,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "poder",
+      "vigilancia",
+      "lenguaje",
+      "libertad",
+      "totalitarismo"
+    ],
+    "summary": "Una sociedad sometida a vigilancia permanente, propaganda y manipulación de la verdad."
+  },
+  {
+    "id": "rebelion-granja",
+    "title": "Rebelión en la granja",
+    "author": "George Orwell",
+    "year": 1945,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "poder",
+      "revolucion",
+      "propaganda",
+      "desigualdad"
+    ],
+    "summary": "Una fábula política sobre cómo una revolución puede reproducir nuevas formas de opresión."
+  },
+  {
+    "id": "mundo-feliz",
+    "title": "Un mundo feliz",
+    "author": "Aldous Huxley",
+    "year": 1932,
+    "genre": "ciencia-ficcion",
+    "approach": "ciencia-ficcion",
+    "topics": [
+      "poder",
+      "tecnologia",
+      "consumo",
+      "libertad",
+      "sociedad"
+    ],
+    "summary": "Una distopía donde el control social funciona mediante placer, condicionamiento y consumo."
+  },
+  {
+    "id": "fahrenheit-451",
+    "title": "Fahrenheit 451",
+    "author": "Ray Bradbury",
+    "year": 1953,
+    "genre": "ciencia-ficcion",
+    "approach": "ciencia-ficcion",
+    "topics": [
+      "censura",
+      "libros",
+      "sociedad",
+      "tecnologia",
+      "libertad"
+    ],
+    "summary": "Un bombero encargado de quemar libros comienza a cuestionar una sociedad que evita pensar."
+  },
+  {
+    "id": "cuento-criada",
+    "title": "El cuento de la criada",
+    "author": "Margaret Atwood",
+    "year": 1985,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "poder",
+      "genero",
+      "religion",
+      "libertad",
+      "totalitarismo"
+    ],
+    "summary": "Una mujer intenta sobrevivir en un régimen que controla su cuerpo, su identidad y su memoria."
+  },
+  {
+    "id": "vigilar-castigar",
+    "title": "Vigilar y castigar",
+    "author": "Michel Foucault",
+    "year": 1975,
+    "genre": "ensayo",
+    "approach": "academico",
+    "topics": [
+      "poder",
+      "vigilancia",
+      "instituciones",
+      "disciplina"
+    ],
+    "summary": "Un análisis histórico de las prisiones y de las formas modernas de disciplina social."
+  },
+  {
+    "id": "sapiens",
+    "title": "Sapiens",
+    "author": "Yuval Noah Harari",
+    "year": 2011,
+    "genre": "ensayo",
+    "approach": "ensayo",
+    "topics": [
+      "historia",
+      "evolucion",
+      "religion",
+      "economia",
+      "sociedad"
+    ],
+    "summary": "Una interpretación general de la historia humana desde la evolución hasta el presente."
+  },
+  {
+    "id": "homo-deus",
+    "title": "Homo Deus",
+    "author": "Yuval Noah Harari",
+    "year": 2015,
+    "genre": "ensayo",
+    "approach": "ensayo",
+    "topics": [
+      "tecnologia",
+      "futuro",
+      "datos",
+      "humanidad",
+      "inteligencia-artificial"
+    ],
+    "summary": "Una reflexión sobre los posibles proyectos y riesgos futuros de la humanidad."
+  },
+  {
+    "id": "armas-germenes-acero",
+    "title": "Armas, gérmenes y acero",
+    "author": "Jared Diamond",
+    "year": 1997,
+    "genre": "ensayo",
+    "approach": "academico",
+    "topics": [
+      "historia",
+      "geografia",
+      "tecnologia",
+      "desigualdad",
+      "civilizacion"
+    ],
+    "summary": "Explica por qué distintas sociedades desarrollaron tecnologías y estructuras de poder desiguales."
+  },
+  {
+    "id": "gran-transformacion",
+    "title": "La gran transformación",
+    "author": "Karl Polanyi",
+    "year": 1944,
+    "genre": "ensayo",
+    "approach": "academico",
+    "topics": [
+      "economia",
+      "mercado",
+      "sociedad",
+      "historia",
+      "trabajo"
+    ],
+    "summary": "Estudia el surgimiento de la economía de mercado y sus consecuencias sociales."
+  },
+  {
+    "id": "capital-siglo-xxi",
+    "title": "El capital en el siglo XXI",
+    "author": "Thomas Piketty",
+    "year": 2013,
+    "genre": "ensayo",
+    "approach": "academico",
+    "topics": [
+      "economia",
+      "desigualdad",
+      "capital",
+      "historia"
+    ],
+    "summary": "Analiza la concentración de riqueza y la desigualdad económica a largo plazo."
+  },
+  {
+    "id": "riqueza-naciones",
+    "title": "La riqueza de las naciones",
+    "author": "Adam Smith",
+    "year": 1776,
+    "genre": "ensayo",
+    "approach": "academico",
+    "topics": [
+      "economia",
+      "mercado",
+      "trabajo",
+      "sociedad"
+    ],
+    "summary": "Una obra fundacional sobre producción, intercambio, división del trabajo y mercados."
+  },
+  {
+    "id": "manifiesto-comunista",
+    "title": "Manifiesto del Partido Comunista",
+    "author": "Karl Marx y Friedrich Engels",
+    "year": 1848,
+    "genre": "ensayo",
+    "approach": "ensayo",
+    "topics": [
+      "economia",
+      "clases",
+      "revolucion",
+      "trabajo",
+      "desigualdad"
+    ],
+    "summary": "Un texto político sobre lucha de clases, capitalismo y transformación social."
+  },
+  {
+    "id": "principe",
+    "title": "El príncipe",
+    "author": "Nicolás Maquiavelo",
+    "year": 1532,
+    "genre": "ensayo",
+    "approach": "ensayo",
+    "topics": [
+      "poder",
+      "politica",
+      "liderazgo",
+      "estado"
+    ],
+    "summary": "Una reflexión sobre la conquista, conservación y ejercicio del poder político."
+  },
+  {
+    "id": "democracia-america",
+    "title": "La democracia en América",
+    "author": "Alexis de Tocqueville",
+    "year": 1835,
+    "genre": "ensayo",
+    "approach": "academico",
+    "topics": [
+      "democracia",
+      "sociedad",
+      "igualdad",
+      "politica",
+      "libertad"
+    ],
+    "summary": "Analiza las instituciones democráticas y las costumbres políticas de Estados Unidos."
+  },
+  {
+    "id": "contrato-social",
+    "title": "El contrato social",
+    "author": "Jean-Jacques Rousseau",
+    "year": 1762,
+    "genre": "ensayo",
+    "approach": "ensayo",
+    "topics": [
+      "politica",
+      "libertad",
+      "estado",
+      "democracia",
+      "sociedad"
+    ],
+    "summary": "Plantea cómo puede organizarse una comunidad política basada en soberanía popular."
+  },
+  {
+    "id": "banalidad-mal",
+    "title": "Eichmann en Jerusalén",
+    "author": "Hannah Arendt",
+    "year": 1963,
+    "genre": "ensayo",
+    "approach": "ensayo",
+    "topics": [
+      "totalitarismo",
+      "responsabilidad",
+      "moral",
+      "historia",
+      "poder"
+    ],
+    "summary": "Una reflexión sobre responsabilidad individual, obediencia y la banalidad del mal."
+  },
+  {
+    "id": "origenes-totalitarismo",
+    "title": "Los orígenes del totalitarismo",
+    "author": "Hannah Arendt",
+    "year": 1951,
+    "genre": "ensayo",
+    "approach": "academico",
+    "topics": [
+      "totalitarismo",
+      "poder",
+      "historia",
+      "propaganda",
+      "sociedad"
+    ],
+    "summary": "Estudia los procesos históricos y políticos que hicieron posibles los regímenes totalitarios."
+  },
+  {
+    "id": "prinicipito",
+    "title": "El principito",
+    "author": "Antoine de Saint-Exupéry",
+    "year": 1943,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "amistad",
+      "sentido",
+      "infancia",
+      "soledad",
+      "responsabilidad"
+    ],
+    "summary": "Una fábula sobre los vínculos, la imaginación y aquello que da sentido a la vida."
+  },
+  {
+    "id": "momo",
+    "title": "Momo",
+    "author": "Michael Ende",
+    "year": 1973,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "tiempo",
+      "amistad",
+      "sociedad",
+      "consumo",
+      "infancia"
+    ],
+    "summary": "Una niña enfrenta a seres que roban el tiempo de las personas."
+  },
+  {
+    "id": "hombre-sentido",
+    "title": "El hombre en busca de sentido",
+    "author": "Viktor Frankl",
+    "year": 1946,
+    "genre": "ensayo",
+    "approach": "ensayo",
+    "topics": [
+      "sentido",
+      "sufrimiento",
+      "psicologia",
+      "esperanza",
+      "libertad"
+    ],
+    "summary": "Una reflexión psicológica y personal sobre encontrar propósito en circunstancias extremas."
+  },
+  {
+    "id": "meditaciones",
+    "title": "Meditaciones",
+    "author": "Marco Aurelio",
+    "year": 180,
+    "genre": "ensayo",
+    "approach": "ensayo",
+    "topics": [
+      "filosofia",
+      "autocontrol",
+      "muerte",
+      "virtud",
+      "sentido"
+    ],
+    "summary": "Notas personales sobre disciplina interior, deber, serenidad y vida virtuosa."
+  },
+  {
+    "id": "etica-nicomaco",
+    "title": "Ética a Nicómaco",
+    "author": "Aristóteles",
+    "year": -340,
+    "genre": "ensayo",
+    "approach": "academico",
+    "topics": [
+      "filosofia",
+      "virtud",
+      "felicidad",
+      "etica",
+      "sociedad"
+    ],
+    "summary": "Una investigación sobre la vida buena, la virtud y la felicidad humana."
+  },
+  {
+    "id": "existencialismo-humanismo",
+    "title": "El existencialismo es un humanismo",
+    "author": "Jean-Paul Sartre",
+    "year": 1946,
+    "genre": "ensayo",
+    "approach": "ensayo",
+    "topics": [
+      "libertad",
+      "responsabilidad",
+      "sentido",
+      "filosofia"
+    ],
+    "summary": "Una defensa de la libertad humana y de la responsabilidad por las propias elecciones."
+  },
+  {
+    "id": "mito-sisifo",
+    "title": "El mito de Sísifo",
+    "author": "Albert Camus",
+    "year": 1942,
+    "genre": "ensayo",
+    "approach": "ensayo",
+    "topics": [
+      "absurdo",
+      "sentido",
+      "muerte",
+      "libertad",
+      "filosofia"
+    ],
+    "summary": "Una reflexión sobre el absurdo y la posibilidad de vivir sin respuestas definitivas."
+  },
+  {
+    "id": "extranjero",
+    "title": "El extranjero",
+    "author": "Albert Camus",
+    "year": 1942,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "absurdo",
+      "sociedad",
+      "muerte",
+      "soledad"
+    ],
+    "summary": "La historia de un hombre distante frente a las normas sociales y a su propio destino."
+  },
+  {
+    "id": "crimen-castigo",
+    "title": "Crimen y castigo",
+    "author": "Fiódor Dostoievski",
+    "year": 1866,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "culpa",
+      "moral",
+      "pobreza",
+      "psicologia",
+      "redencion"
+    ],
+    "summary": "Un joven comete un crimen y enfrenta sus consecuencias psicológicas y morales."
+  },
+  {
+    "id": "hermanos-karamazov",
+    "title": "Los hermanos Karamázov",
+    "author": "Fiódor Dostoievski",
+    "year": 1880,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "familia",
+      "religion",
+      "moral",
+      "culpa",
+      "libertad"
+    ],
+    "summary": "Una novela familiar y filosófica sobre fe, libertad, violencia y responsabilidad."
+  },
+  {
+    "id": "ana-karenina",
+    "title": "Anna Karénina",
+    "author": "León Tolstói",
+    "year": 1878,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "amor",
+      "familia",
+      "sociedad",
+      "moral",
+      "genero"
+    ],
+    "summary": "Una tragedia sobre amor, familia, deseo y presión social."
+  },
+  {
+    "id": "guerra-paz",
+    "title": "Guerra y paz",
+    "author": "León Tolstói",
+    "year": 1869,
+    "genre": "novela-historica",
+    "approach": "novela-historica",
+    "topics": [
+      "guerra",
+      "historia",
+      "familia",
+      "poder",
+      "destino"
+    ],
+    "summary": "Una gran novela sobre familias rusas durante las guerras napoleónicas."
+  },
+  {
+    "id": "quijote",
+    "title": "Don Quijote de la Mancha",
+    "author": "Miguel de Cervantes",
+    "year": 1605,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "realidad",
+      "ficcion",
+      "identidad",
+      "amistad",
+      "libros"
+    ],
+    "summary": "Un lector transforma su vida al intentar vivir según los ideales de los libros de caballería."
+  },
+  {
+    "id": "hamlet",
+    "title": "Hamlet",
+    "author": "William Shakespeare",
+    "year": 1603,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "venganza",
+      "muerte",
+      "poder",
+      "duda",
+      "familia"
+    ],
+    "summary": "Un príncipe duda entre actuar, vengar a su padre y comprender la verdad."
+  },
+  {
+    "id": "orgullo-prejuicio",
+    "title": "Orgullo y prejuicio",
+    "author": "Jane Austen",
+    "year": 1813,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "amor",
+      "clases",
+      "familia",
+      "sociedad",
+      "genero"
+    ],
+    "summary": "Una novela sobre prejuicios, matrimonio, clase social y crecimiento personal."
+  },
+  {
+    "id": "jane-eyre",
+    "title": "Jane Eyre",
+    "author": "Charlotte Brontë",
+    "year": 1847,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "amor",
+      "identidad",
+      "genero",
+      "libertad",
+      "clases"
+    ],
+    "summary": "Una joven busca independencia, dignidad y amor sin renunciar a su identidad."
+  },
+  {
+    "id": "frankenstein",
+    "title": "Frankenstein",
+    "author": "Mary Shelley",
+    "year": 1818,
+    "genre": "ciencia-ficcion",
+    "approach": "ciencia-ficcion",
+    "topics": [
+      "ciencia",
+      "responsabilidad",
+      "identidad",
+      "soledad",
+      "tecnologia"
+    ],
+    "summary": "Un científico crea vida y debe enfrentar las consecuencias de abandonar su creación."
+  },
+  {
+    "id": "dorian-gray",
+    "title": "El retrato de Dorian Gray",
+    "author": "Oscar Wilde",
+    "year": 1890,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "belleza",
+      "moral",
+      "identidad",
+      "sociedad",
+      "corrupcion"
+    ],
+    "summary": "Un joven conserva su apariencia mientras un retrato refleja su deterioro moral."
+  },
+  {
+    "id": "gatsby",
+    "title": "El gran Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "year": 1925,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "amor",
+      "riqueza",
+      "clases",
+      "identidad",
+      "sueño-americano"
+    ],
+    "summary": "Una historia de deseo, riqueza e ilusión en Estados Unidos durante los años veinte."
+  },
+  {
+    "id": "matar-ruisenor",
+    "title": "Matar a un ruiseñor",
+    "author": "Harper Lee",
+    "year": 1960,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "justicia",
+      "racismo",
+      "infancia",
+      "moral",
+      "sociedad"
+    ],
+    "summary": "Una niña observa un juicio atravesado por racismo, prejuicio y valentía moral."
+  },
+  {
+    "id": "beloved",
+    "title": "Beloved",
+    "author": "Toni Morrison",
+    "year": 1987,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "memoria",
+      "esclavitud",
+      "familia",
+      "trauma",
+      "libertad"
+    ],
+    "summary": "Una familia enfrenta la memoria traumática de la esclavitud y sus consecuencias."
+  },
+  {
+    "id": "cien-soledad",
+    "title": "Cien años de soledad",
+    "author": "Gabriel García Márquez",
+    "year": 1967,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "memoria",
+      "familia",
+      "violencia",
+      "america-latina",
+      "historia"
+    ],
+    "summary": "La historia de la familia Buendía y de Macondo a través de generaciones."
+  },
+  {
+    "id": "amor-colera",
+    "title": "El amor en los tiempos del cólera",
+    "author": "Gabriel García Márquez",
+    "year": 1985,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "amor",
+      "tiempo",
+      "vejez",
+      "memoria",
+      "familia"
+    ],
+    "summary": "Una historia sobre amor persistente, espera y transformación a lo largo de la vida."
+  },
+  {
+    "id": "casa-espiritus",
+    "title": "La casa de los espíritus",
+    "author": "Isabel Allende",
+    "year": 1982,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "familia",
+      "politica",
+      "america-latina",
+      "memoria",
+      "genero"
+    ],
+    "summary": "Una saga familiar atravesada por cambios políticos, afectos y elementos fantásticos."
+  },
+  {
+    "id": "venas-abiertas",
+    "title": "Las venas abiertas de América Latina",
+    "author": "Eduardo Galeano",
+    "year": 1971,
+    "genre": "ensayo",
+    "approach": "ensayo",
+    "topics": [
+      "america-latina",
+      "economia",
+      "colonialismo",
+      "historia",
+      "desigualdad"
+    ],
+    "summary": "Una interpretación histórica de la explotación económica de América Latina."
+  },
+  {
+    "id": "laberinto-soledad",
+    "title": "El laberinto de la soledad",
+    "author": "Octavio Paz",
+    "year": 1950,
+    "genre": "ensayo",
+    "approach": "ensayo",
+    "topics": [
+      "identidad",
+      "mexico",
+      "historia",
+      "soledad",
+      "cultura"
+    ],
+    "summary": "Una exploración ensayística de la identidad y la historia mexicanas."
+  },
+  {
+    "id": "ficciones",
+    "title": "Ficciones",
+    "author": "Jorge Luis Borges",
+    "year": 1944,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "realidad",
+      "tiempo",
+      "infinito",
+      "libros",
+      "identidad"
+    ],
+    "summary": "Relatos que exploran laberintos, bibliotecas, dobles, tiempo e infinitos."
+  },
+  {
+    "id": "rayuela",
+    "title": "Rayuela",
+    "author": "Julio Cortázar",
+    "year": 1963,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "amor",
+      "lenguaje",
+      "identidad",
+      "juego",
+      "existencia"
+    ],
+    "summary": "Una novela experimental sobre amor, búsqueda personal y formas alternativas de leer."
+  },
+  {
+    "id": "pedro-paramo",
+    "title": "Pedro Páramo",
+    "author": "Juan Rulfo",
+    "year": 1955,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "memoria",
+      "muerte",
+      "poder",
+      "mexico",
+      "familia"
+    ],
+    "summary": "Un hombre llega a un pueblo habitado por voces, recuerdos y deudas del pasado."
+  },
+  {
+    "id": "yo-supremo",
+    "title": "Yo, el Supremo",
+    "author": "Augusto Roa Bastos",
+    "year": 1974,
+    "genre": "novela-historica",
+    "approach": "novela-historica",
+    "topics": [
+      "poder",
+      "dictadura",
+      "lenguaje",
+      "historia",
+      "america-latina"
+    ],
+    "summary": "Una novela sobre autoritarismo, escritura y construcción de la memoria política."
+  },
+  {
+    "id": "operacion-masacre",
+    "title": "Operación Masacre",
+    "author": "Rodolfo Walsh",
+    "year": 1957,
+    "genre": "no-ficcion",
+    "approach": "academico",
+    "topics": [
+      "argentina",
+      "violencia",
+      "politica",
+      "justicia",
+      "periodismo"
+    ],
+    "summary": "Una investigación narrativa sobre fusilamientos clandestinos en Argentina."
+  },
+  {
+    "id": "nunca-mas",
+    "title": "Nunca Más",
+    "author": "CONADEP",
+    "year": 1984,
+    "genre": "no-ficcion",
+    "approach": "academico",
+    "topics": [
+      "argentina",
+      "dictadura",
+      "derechos-humanos",
+      "memoria",
+      "violencia"
+    ],
+    "summary": "Un informe sobre desapariciones y violaciones de derechos humanos durante la dictadura argentina."
+  },
+  {
+    "id": "martin-fierro",
+    "title": "Martín Fierro",
+    "author": "José Hernández",
+    "year": 1872,
+    "genre": "poesia",
+    "approach": "ficcion",
+    "topics": [
+      "argentina",
+      "identidad",
+      "justicia",
+      "libertad",
+      "campo"
+    ],
+    "summary": "Un poema narrativo sobre un gaucho perseguido por la injusticia y la autoridad."
+  },
+  {
+    "id": "facundo",
+    "title": "Facundo",
+    "author": "Domingo F. Sarmiento",
+    "year": 1845,
+    "genre": "ensayo",
+    "approach": "ensayo",
+    "topics": [
+      "argentina",
+      "politica",
+      "historia",
+      "civilizacion",
+      "identidad"
+    ],
+    "summary": "Un ensayo político y biográfico sobre sociedad, poder y formación nacional argentina."
+  },
+  {
+    "id": "aleph",
+    "title": "El Aleph",
+    "author": "Jorge Luis Borges",
+    "year": 1949,
+    "genre": "ficcion",
+    "approach": "ficcion",
+    "topics": [
+      "infinito",
+      "memoria",
+      "realidad",
+      "tiempo",
+      "libros"
+    ],
+    "summary": "Relatos sobre memoria, infinito, identidad y los límites de la percepción."
+  },
+  {
+    "id": "fundacion",
+    "title": "Fundación",
+    "author": "Isaac Asimov",
+    "year": 1951,
+    "genre": "ciencia-ficcion",
+    "approach": "ciencia-ficcion",
+    "topics": [
+      "historia",
+      "futuro",
+      "ciencia",
+      "poder",
+      "sociedad"
+    ],
+    "summary": "Un proyecto científico intenta reducir siglos de barbarie tras la caída de un imperio galáctico."
+  },
+  {
+    "id": "yo-robot",
+    "title": "Yo, robot",
+    "author": "Isaac Asimov",
+    "year": 1950,
+    "genre": "ciencia-ficcion",
+    "approach": "ciencia-ficcion",
+    "topics": [
+      "robots",
+      "etica",
+      "tecnologia",
+      "inteligencia-artificial",
+      "sociedad"
+    ],
+    "summary": "Relatos que exploran dilemas éticos y sociales derivados de robots inteligentes."
+  },
+  {
+    "id": "dune",
+    "title": "Dune",
+    "author": "Frank Herbert",
+    "year": 1965,
+    "genre": "ciencia-ficcion",
+    "approach": "ciencia-ficcion",
+    "topics": [
+      "poder",
+      "ecologia",
+      "religion",
+      "imperio",
+      "recursos"
+    ],
+    "summary": "Una lucha por poder, supervivencia y control de recursos en un planeta desértico."
+  },
+  {
+    "id": "neuromante",
+    "title": "Neuromante",
+    "author": "William Gibson",
+    "year": 1984,
+    "genre": "ciencia-ficcion",
+    "approach": "ciencia-ficcion",
+    "topics": [
+      "tecnologia",
+      "inteligencia-artificial",
+      "identidad",
+      "corporaciones",
+      "futuro"
+    ],
+    "summary": "Un hacker participa en una operación que involucra inteligencias artificiales y grandes corporaciones."
+  },
+  {
+    "id": "mano-izquierda-oscuridad",
+    "title": "La mano izquierda de la oscuridad",
+    "author": "Ursula K. Le Guin",
+    "year": 1969,
+    "genre": "ciencia-ficcion",
+    "approach": "ciencia-ficcion",
+    "topics": [
+      "genero",
+      "sociedad",
+      "politica",
+      "identidad",
+      "cultura"
+    ],
+    "summary": "Un enviado humano conoce una sociedad donde el género funciona de manera diferente."
+  },
+  {
+    "id": "desposeidos",
+    "title": "Los desposeídos",
+    "author": "Ursula K. Le Guin",
+    "year": 1974,
+    "genre": "ciencia-ficcion",
+    "approach": "ciencia-ficcion",
+    "topics": [
+      "politica",
+      "anarquismo",
+      "libertad",
+      "sociedad",
+      "economia"
+    ],
+    "summary": "Dos sociedades opuestas permiten comparar propiedad, libertad y organización social."
+  },
+  {
+    "id": "problema-tres-cuerpos",
+    "title": "El problema de los tres cuerpos",
+    "author": "Liu Cixin",
+    "year": 2006,
+    "genre": "ciencia-ficcion",
+    "approach": "ciencia-ficcion",
+    "topics": [
+      "ciencia",
+      "tecnologia",
+      "humanidad",
+      "futuro",
+      "civilizacion"
+    ],
+    "summary": "El contacto con otra civilización altera la ciencia, la política y el futuro humano."
+  },
+  {
+    "id": "breve-historia-tiempo",
+    "title": "Historia del tiempo",
+    "author": "Stephen Hawking",
+    "year": 1988,
+    "genre": "divulgacion",
+    "approach": "academico",
+    "topics": [
+      "universo",
+      "tiempo",
+      "fisica",
+      "ciencia",
+      "cosmologia"
+    ],
+    "summary": "Una introducción accesible a grandes preguntas sobre el universo y el tiempo."
+  },
+  {
+    "id": "cosmos",
+    "title": "Cosmos",
+    "author": "Carl Sagan",
+    "year": 1980,
+    "genre": "divulgacion",
+    "approach": "academico",
+    "topics": [
+      "universo",
+      "ciencia",
+      "humanidad",
+      "historia",
+      "astronomia"
+    ],
+    "summary": "Un recorrido por el universo, la ciencia y el lugar de la humanidad en el cosmos."
+  },
+  {
+    "id": "gen-egoista",
+    "title": "El gen egoísta",
+    "author": "Richard Dawkins",
+    "year": 1976,
+    "genre": "divulgacion",
+    "approach": "academico",
+    "topics": [
+      "evolucion",
+      "biologia",
+      "ciencia",
+      "conducta",
+      "humanidad"
+    ],
+    "summary": "Presenta una mirada de la evolución centrada en genes, selección y cooperación."
+  },
+  {
+    "id": "origen-especies",
+    "title": "El origen de las especies",
+    "author": "Charles Darwin",
+    "year": 1859,
+    "genre": "ciencia",
+    "approach": "academico",
+    "topics": [
+      "evolucion",
+      "biologia",
+      "ciencia",
+      "naturaleza"
+    ],
+    "summary": "La obra fundacional de la teoría de la evolución por selección natural."
+  },
+  {
+    "id": "primavera-silenciosa",
+    "title": "Primavera silenciosa",
+    "author": "Rachel Carson",
+    "year": 1962,
+    "genre": "ensayo",
+    "approach": "academico",
+    "topics": [
+      "ecologia",
+      "ciencia",
+      "industria",
+      "naturaleza",
+      "salud"
+    ],
+    "summary": "Una investigación sobre los efectos ambientales y sanitarios de pesticidas."
+  },
+  {
+    "id": "sexta-extincion",
+    "title": "La sexta extinción",
+    "author": "Elizabeth Kolbert",
+    "year": 2014,
+    "genre": "divulgacion",
+    "approach": "academico",
+    "topics": [
+      "ecologia",
+      "extincion",
+      "ciencia",
+      "humanidad",
+      "naturaleza"
+    ],
+    "summary": "Examina cómo la actividad humana está acelerando una gran pérdida de biodiversidad."
+  },
+  {
+    "id": "pensar-rapido",
+    "title": "Pensar rápido, pensar despacio",
+    "author": "Daniel Kahneman",
+    "year": 2011,
+    "genre": "ensayo",
+    "approach": "academico",
+    "topics": [
+      "psicologia",
+      "decisiones",
+      "sesgos",
+      "economia",
+      "mente"
+    ],
+    "summary": "Explica dos modos de pensamiento y los errores frecuentes de nuestras decisiones."
+  },
+  {
+    "id": "influencia",
+    "title": "Influencia",
+    "author": "Robert Cialdini",
+    "year": 1984,
+    "genre": "ensayo",
+    "approach": "academico",
+    "topics": [
+      "psicologia",
+      "persuasion",
+      "decisiones",
+      "sociedad"
+    ],
+    "summary": "Analiza principios psicológicos que influyen en decisiones y comportamientos."
+  },
+  {
+    "id": "inteligencia-emocional",
+    "title": "Inteligencia emocional",
+    "author": "Daniel Goleman",
+    "year": 1995,
+    "genre": "ensayo",
+    "approach": "ensayo",
+    "topics": [
+      "emociones",
+      "psicologia",
+      "relaciones",
+      "trabajo",
+      "mente"
+    ],
+    "summary": "Explora la importancia de reconocer y regular emociones en la vida personal y social."
+  },
+  {
+    "id": "interpretacion-suenos",
+    "title": "La interpretación de los sueños",
+    "author": "Sigmund Freud",
+    "year": 1899,
+    "genre": "ensayo",
+    "approach": "academico",
+    "topics": [
+      "psicologia",
+      "sueños",
+      "inconsciente",
+      "mente"
+    ],
+    "summary": "Una obra influyente sobre sueños, deseos y procesos inconscientes."
+  },
+  {
+    "id": "segundo-sexo",
+    "title": "El segundo sexo",
+    "author": "Simone de Beauvoir",
+    "year": 1949,
+    "genre": "ensayo",
+    "approach": "ensayo",
+    "topics": [
+      "genero",
+      "libertad",
+      "sociedad",
+      "identidad",
+      "historia"
+    ],
+    "summary": "Un estudio filosófico e histórico sobre la construcción social de la mujer."
+  },
+  {
+    "id": "habitacion-propia",
+    "title": "Una habitación propia",
+    "author": "Virginia Woolf",
+    "year": 1929,
+    "genre": "ensayo",
+    "approach": "ensayo",
+    "topics": [
+      "genero",
+      "literatura",
+      "libertad",
+      "economia",
+      "identidad"
+    ],
+    "summary": "Una reflexión sobre las condiciones materiales necesarias para que las mujeres puedan escribir."
+  },
+  {
+    "id": "feminismo-todo-mundo",
+    "title": "El feminismo es para todo el mundo",
+    "author": "bell hooks",
+    "year": 2000,
+    "genre": "ensayo",
+    "approach": "ensayo",
+    "topics": [
+      "genero",
+      "sociedad",
+      "educacion",
+      "desigualdad",
+      "politica"
+    ],
+    "summary": "Una introducción accesible al feminismo como proyecto de transformación social."
+  },
+  {
+    "id": "diario-ana-frank",
+    "title": "El diario de Ana Frank",
+    "author": "Ana Frank",
+    "year": 1947,
+    "genre": "biografia",
+    "approach": "biografia",
+    "topics": [
+      "guerra",
+      "holocausto",
+      "familia",
+      "memoria",
+      "adolescencia"
+    ],
+    "summary": "El testimonio de una adolescente escondida durante la ocupación nazi."
+  },
+  {
+    "id": "larga-marcha-libertad",
+    "title": "El largo camino hacia la libertad",
+    "author": "Nelson Mandela",
+    "year": 1994,
+    "genre": "biografia",
+    "approach": "biografia",
+    "topics": [
+      "racismo",
+      "politica",
+      "libertad",
+      "liderazgo",
+      "historia"
+    ],
+    "summary": "La autobiografía de Mandela sobre apartheid, prisión, negociación y democracia."
+  },
+  {
+    "id": "steve-jobs",
+    "title": "Steve Jobs",
+    "author": "Walter Isaacson",
+    "year": 2011,
+    "genre": "biografia",
+    "approach": "biografia",
+    "topics": [
+      "tecnologia",
+      "innovacion",
+      "liderazgo",
+      "empresa",
+      "creatividad"
+    ],
+    "summary": "Una biografía sobre innovación, diseño, liderazgo y contradicciones personales."
+  },
+  {
+    "id": "einstein-vida-universo",
+    "title": "Einstein: su vida y su universo",
+    "author": "Walter Isaacson",
+    "year": 2007,
+    "genre": "biografia",
+    "approach": "biografia",
+    "topics": [
+      "ciencia",
+      "fisica",
+      "creatividad",
+      "historia",
+      "biografia"
+    ],
+    "summary": "Una biografía que relaciona la vida de Einstein con sus ideas científicas."
+  },
+  {
+    "id": "leonardo-vinci",
+    "title": "Leonardo da Vinci",
+    "author": "Walter Isaacson",
+    "year": 2017,
+    "genre": "biografia",
+    "approach": "biografia",
+    "topics": [
+      "arte",
+      "ciencia",
+      "creatividad",
+      "historia",
+      "innovacion"
+    ],
+    "summary": "Una biografía sobre curiosidad, observación y conexiones entre arte y ciencia."
+  },
+  {
+    "id": "open",
+    "title": "Open",
+    "author": "Andre Agassi",
+    "year": 2009,
+    "genre": "biografia",
+    "approach": "biografia",
+    "topics": [
+      "deporte",
+      "identidad",
+      "disciplina",
+      "familia",
+      "exito"
+    ],
+    "summary": "Una autobiografía sobre presión, competencia, identidad y vida profesional."
+  },
+  {
+    "id": "educacion",
+    "title": "Educated",
+    "author": "Tara Westover",
+    "year": 2018,
+    "genre": "biografia",
+    "approach": "biografia",
+    "topics": [
+      "educacion",
+      "familia",
+      "identidad",
+      "libertad",
+      "memoria"
+    ],
+    "summary": "Una memoria sobre educación, familia, aislamiento y construcción de una identidad propia."
+  }
+]

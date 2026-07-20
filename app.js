@@ -1,228 +1,142 @@
 
-const library = [
-  {
-    id: "1984",
-    title: "1984",
-    author: "George Orwell",
-    summary: "Una novela sobre vigilancia, manipulación del lenguaje, poder político y control de la verdad.",
-    topics: ["poder", "vigilancia", "lenguaje", "libertad"],
-    recommendations: [
-      { title: "Vigilar y castigar", author: "Michel Foucault", approach: "academico", topics: ["poder","vigilancia"], reason: "Amplía la idea de vigilancia mostrando cómo las instituciones disciplinan los cuerpos y las conductas." },
-      { title: "Un mundo feliz", author: "Aldous Huxley", approach: "ciencia-ficcion", topics: ["poder","libertad"], reason: "Contrasta el control por miedo con un control basado en placer, consumo y condicionamiento." },
-      { title: "La rebelión de las masas", author: "José Ortega y Gasset", approach: "ensayo", topics: ["poder","libertad"], reason: "Aporta una mirada filosófica sobre sociedad de masas, autoridad y vida pública." },
-      { title: "El cuento de la criada", author: "Margaret Atwood", approach: "ficcion", topics: ["poder","libertad"], reason: "Explora cómo un régimen autoritario controla los cuerpos, el lenguaje y la memoria." },
-      { title: "George Orwell: una vida", author: "D. J. Taylor", approach: "biografia", topics: ["lenguaje","poder"], reason: "Permite comprender las experiencias políticas y personales que formaron las ideas del autor." }
-    ]
-  },
-  {
-    id: "sapiens",
-    title: "Sapiens",
-    author: "Yuval Noah Harari",
-    summary: "Una interpretación general de la historia humana, desde la evolución hasta las sociedades contemporáneas.",
-    topics: ["historia", "religion", "economia", "tecnologia"],
-    recommendations: [
-      { title: "Armas, gérmenes y acero", author: "Jared Diamond", approach: "academico", topics: ["historia","tecnologia"], reason: "Ofrece otra explicación de las desigualdades históricas, centrada en geografía, cultivos y tecnología." },
-      { title: "La gran transformación", author: "Karl Polanyi", approach: "ensayo", topics: ["economia","historia"], reason: "Profundiza en la aparición de la economía de mercado y sus efectos sociales." },
-      { title: "Los pilares de la Tierra", author: "Ken Follett", approach: "novela-historica", topics: ["historia","religion"], reason: "Convierte procesos sociales, religiosos y económicos medievales en una experiencia narrativa." },
-      { title: "El gen egoísta", author: "Richard Dawkins", approach: "academico", topics: ["historia","tecnologia"], reason: "Complementa la mirada histórica con una explicación evolutiva centrada en selección natural y genes." },
-      { title: "Homo Deus", author: "Yuval Noah Harari", approach: "ensayo", topics: ["tecnologia","economia"], reason: "Continúa la reflexión hacia posibles futuros humanos dominados por datos, algoritmos y biotecnología." }
-    ]
-  },
-  {
-    id: "principito",
-    title: "El principito",
-    author: "Antoine de Saint-Exupéry",
-    summary: "Una fábula sobre vínculos, responsabilidad, imaginación, soledad y sentido de la vida.",
-    topics: ["amistad", "sentido", "infancia", "soledad"],
-    recommendations: [
-      { title: "Momo", author: "Michael Ende", approach: "ficcion", topics: ["amistad","sentido"], reason: "Explora el valor del tiempo, la escucha y los vínculos frente a una sociedad acelerada." },
-      { title: "El hombre en busca de sentido", author: "Viktor Frankl", approach: "ensayo", topics: ["sentido","soledad"], reason: "Profundiza en la búsqueda de propósito desde una experiencia humana y psicológica extrema." },
-      { title: "Peter Pan", author: "J. M. Barrie", approach: "ficcion", topics: ["infancia","soledad"], reason: "Permite comparar dos visiones de la infancia, la pérdida y la dificultad de crecer." },
-      { title: "Saint-Exupéry", author: "Stacy Schiff", approach: "biografia", topics: ["sentido","soledad"], reason: "Relaciona la obra con la vida del autor, su experiencia como aviador y su mirada humanista." }
-    ]
-  },
-  {
-    id: "cien-anos",
-    title: "Cien años de soledad",
-    author: "Gabriel García Márquez",
-    summary: "La historia de la familia Buendía y de Macondo, atravesada por memoria, violencia, deseo y repetición histórica.",
-    topics: ["memoria", "familia", "violencia", "america-latina"],
-    recommendations: [
-      { title: "La casa de los espíritus", author: "Isabel Allende", approach: "ficcion", topics: ["familia","america-latina"], reason: "Comparte una saga familiar latinoamericana donde lo político y lo fantástico se entrelazan." },
-      { title: "Las venas abiertas de América Latina", author: "Eduardo Galeano", approach: "ensayo", topics: ["violencia","america-latina"], reason: "Aporta contexto histórico y económico para comprender conflictos presentes en la novela." },
-      { title: "Yo, el Supremo", author: "Augusto Roa Bastos", approach: "novela-historica", topics: ["violencia","memoria"], reason: "Profundiza en poder, autoritarismo y construcción de la memoria en América Latina." },
-      { title: "Vivir para contarla", author: "Gabriel García Márquez", approach: "biografia", topics: ["memoria","familia"], reason: "Muestra recuerdos y experiencias que alimentaron personajes, lugares y atmósferas de su ficción." }
-    ]
-  }
-];
-
-const state = {
-  selectedTopic: null,
-  currentRoute: []
+let books = [];
+const state = { selectedTopic:null, route:[] };
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const norm = s => (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+const label = s => (s||"").replaceAll("-"," ").replace(/\b\w/g,c=>c.toUpperCase());
+const storage = {
+  get:(k,d=[])=>JSON.parse(localStorage.getItem(k)||JSON.stringify(d)),
+  set:(k,v)=>localStorage.setItem(k,JSON.stringify(v))
 };
+function toast(msg){ const el=$("#toast"); el.textContent=msg; el.classList.add("show"); setTimeout(()=>el.classList.remove("show"),1800); }
+function currentBook(){ return books.find(b=>b.id===$("#bookSelect").value)||books[0]; }
+function sharedTopics(a,b){ return a.topics.filter(t=>b.topics.includes(t)); }
 
-const bookSelect = document.querySelector("#bookSelect");
-const bookSummary = document.querySelector("#bookSummary");
-const topicButtons = document.querySelector("#topicButtons");
-const approachSelect = document.querySelector("#approachSelect");
-const recommendations = document.querySelector("#recommendations");
-const savedRoutes = document.querySelector("#savedRoutes");
-const installBtn = document.querySelector("#installBtn");
-let deferredPrompt = null;
-
-function currentBook() {
-  return library.find(book => book.id === bookSelect.value) || library[0];
+async function init(){
+  books = await fetch("./books.json").then(r=>r.json());
+  fillSelectors(); bind(); renderBook(); renderLibrary(); renderSaved(); renderActivity(); registerPWA();
 }
-
-function renderBookOptions() {
-  bookSelect.innerHTML = library
-    .map(book => `<option value="${book.id}">${book.title} — ${book.author}</option>`)
-    .join("");
+function fillSelectors(){
+  $("#bookSelect").innerHTML=books.map(b=>`<option value="${b.id}">${b.title} — ${b.author}</option>`).join("");
+  const genres=[...new Set(books.map(b=>b.genre))].sort();
+  $("#genreFilter").innerHTML+=genres.map(g=>`<option value="${g}">${label(g)}</option>`).join("");
+  const topics=[...new Set(books.flatMap(b=>b.topics))].sort();
+  $("#topicFilter").innerHTML+=topics.map(t=>`<option value="${t}">${label(t)}</option>`).join("");
+  $("#libraryStats").innerHTML=statsHTML(books.length,topics.length,genres.length,["Libros","Temas","Géneros"]);
 }
-
-function renderBook() {
-  const book = currentBook();
-  bookSummary.innerHTML = `<strong>${book.title}</strong><br>${book.summary}`;
-  state.selectedTopic = book.topics[0];
-  topicButtons.innerHTML = book.topics
-    .map(topic => `<button class="chip ${topic === state.selectedTopic ? "active" : ""}" data-topic="${topic}">${formatLabel(topic)}</button>`)
-    .join("");
+function renderBook(){
+  const b=currentBook(); if(!b)return;
+  $("#bookInfo").innerHTML=`<strong>${b.title}</strong> · ${b.author} (${b.year>0?b.year:"Antigüedad"})<br>${b.summary}`;
+  state.selectedTopic=b.topics[0];
+  $("#topicChips").innerHTML=b.topics.map(t=>`<button class="chip ${t===state.selectedTopic?"active":""}" data-topic="${t}">${label(t)}</button>`).join("");
 }
-
-function formatLabel(value) {
-  return value.replaceAll("-", " ").replace(/\b\w/g, c => c.toUpperCase());
+function scoreBook(origin,candidate,approach,goal){
+  const shared=sharedTopics(origin,candidate);
+  let score=shared.length*12;
+  if(approach==="todos"||candidate.approach===approach) score+=7;
+  if(goal==="contextualizar" && ["academico","novela-historica","biografia"].includes(candidate.approach)) score+=5;
+  if(goal==="cuestionar" && candidate.genre!==origin.genre) score+=4;
+  if(goal==="aplicar" && candidate.genre!==origin.genre) score+=3;
+  score+=Math.random()*2;
+  return {candidate,shared,score};
 }
-
-function buildRoute() {
-  const book = currentBook();
-  const approach = approachSelect.value;
-  let matches = book.recommendations.filter(item => item.topics.includes(state.selectedTopic));
-
-  if (approach !== "todos") {
-    const filtered = matches.filter(item => item.approach === approach);
-    if (filtered.length) matches = filtered;
-  }
-
-  if (!matches.length) matches = book.recommendations;
-
-  state.currentRoute = [...matches].sort(() => Math.random() - 0.5).slice(0, 4);
-  renderRecommendations();
-  saveRouteHistory(book);
+function buildReason(origin,item,shared,goal){
+  const topicText=shared.length?shared.slice(0,3).map(label).join(", "):label(state.selectedTopic);
+  const goals={
+    ampliar:`Amplía los temas ${topicText} desde otra obra y permite seguir desarrollando la idea central.`,
+    contextualizar:`Aporta contexto para comprender ${topicText} desde una perspectiva histórica, social o conceptual.`,
+    cuestionar:`Ofrece una mirada diferente que puede poner en tensión las ideas de ${origin.title}.`,
+    aplicar:`Traslada ${topicText} a otro género o campo, ayudando a ver nuevas conexiones.`
+  };
+  return goals[goal];
 }
-
-function renderRecommendations() {
-  if (!state.currentRoute.length) {
-    recommendations.innerHTML = `<p class="empty">No encontramos una coincidencia exacta. Prueba otro enfoque.</p>`;
-    return;
-  }
-
-  recommendations.innerHTML = state.currentRoute.map((item, index) => `
+function createRoute(){
+  const origin=currentBook(), approach=$("#approachSelect").value, goal=$("#goalSelect").value;
+  const ranked=books.filter(b=>b.id!==origin.id && (b.topics.includes(state.selectedTopic)||sharedTopics(origin,b).length))
+    .map(b=>scoreBook(origin,b,approach,goal)).sort((a,b)=>b.score-a.score).slice(0,6);
+  state.route=ranked;
+  $("#recommendations").innerHTML=ranked.length?ranked.map((x,i)=>`
     <article class="card">
-      <div class="card-top">
-        <div>
-          <h3>${item.title}</h3>
-          <div class="meta">${item.author}</div>
-        </div>
-        <span class="badge">${formatLabel(item.approach)}</span>
+      <span class="badge">${label(x.candidate.approach)}</span>
+      <h3>${x.candidate.title}</h3>
+      <div class="meta">${x.candidate.author} · ${x.candidate.year}</div>
+      <p class="reason"><strong>Por qué se relaciona:</strong> ${buildReason(origin,x.candidate,x.shared,goal)}</p>
+      <div class="topics">${x.shared.slice(0,4).map(t=>`<span class="topic-tag">${label(t)}</span>`).join("")}</div>
+      <div class="card-actions">
+        <button class="action" data-action="useful" data-id="${x.candidate.id}">👍 Útil</button>
+        <button class="action" data-action="wrong" data-id="${x.candidate.id}">⚠️ No encaja</button>
+        <button class="action" data-action="save" data-id="${x.candidate.id}">🔖 Guardar</button>
       </div>
-      <p class="reason"><strong>Por qué está en esta ruta:</strong> ${item.reason}</p>
-      <div class="actions">
-        <button class="action" data-action="useful" data-index="${index}">👍 Me sirve</button>
-        <button class="action" data-action="not-related" data-index="${index}">⚠️ No se relaciona</button>
-        <button class="action" data-action="save" data-index="${index}">🔖 Guardar</button>
-      </div>
-    </article>
-  `).join("");
+    </article>`).join(""):`<p class="empty">No encontramos coincidencias.</p>`;
+  const hist=storage.get("history");
+  hist.unshift({date:new Date().toISOString(),book:origin.title,topic:state.selectedTopic,approach,goal});
+  storage.set("history",hist.slice(0,30));
+  renderActivity();
 }
-
-function saveRouteHistory(book) {
-  const history = JSON.parse(localStorage.getItem("readingRoutes") || "[]");
-  history.unshift({
-    id: Date.now(),
-    book: book.title,
-    topic: state.selectedTopic,
-    approach: approachSelect.value,
-    date: new Date().toLocaleDateString("es-AR")
+function bookCard(b){
+  const saved=storage.get("saved").includes(b.id);
+  return `<article class="book-card">
+    <span class="badge">${label(b.approach)}</span><h3>${b.title}</h3>
+    <div class="meta">${b.author} · ${b.year}</div>
+    <p class="small">${b.summary}</p>
+    <div class="topics">${b.topics.slice(0,4).map(t=>`<span class="topic-tag">${label(t)}</span>`).join("")}</div>
+    <div class="card-actions"><button class="action" data-open="${b.id}">Explorar</button><button class="action ${saved?"selected":""}" data-save="${b.id}">${saved?"✓ Guardado":"🔖 Guardar"}</button></div>
+  </article>`;
+}
+function renderLibrary(){
+  const q=norm($("#librarySearch").value), genre=$("#genreFilter").value, topic=$("#topicFilter").value;
+  const filtered=books.filter(b=>(genre==="todos"||b.genre===genre)&&(topic==="todos"||b.topics.includes(topic))&&(!q||norm(`${b.title} ${b.author} ${b.topics.join(" ")}`).includes(q)));
+  $("#libraryGrid").innerHTML=filtered.length?filtered.map(bookCard).join(""):`<p class="empty">No hay resultados.</p>`;
+}
+function renderSaved(){
+  const ids=storage.get("saved");
+  const list=ids.map(id=>books.find(b=>b.id===id)).filter(Boolean);
+  $("#savedGrid").innerHTML=list.length?list.map(bookCard).join(""):`<p class="empty">Todavía no guardaste libros.</p>`;
+}
+function renderActivity(){
+  const history=storage.get("history"), feedback=storage.get("feedback");
+  $("#activityStats").innerHTML=statsHTML(history.length,storage.get("saved").length,feedback.length,["Rutas","Guardados","Valoraciones"]);
+  $("#historyList").innerHTML=history.length?history.map(h=>`<div class="history-item"><strong>${h.book}</strong><br>${label(h.topic)} · ${label(h.goal)}<br><span class="small">${new Date(h.date).toLocaleString("es-AR")}</span></div>`).join(""):`<p class="empty">Todavía no creaste rutas.</p>`;
+}
+function statsHTML(a,b,c,n){return [[a,n[0]],[b,n[1]],[c,n[2]]].map(x=>`<div class="stat"><strong>${x[0]}</strong>${x[1]}</div>`).join("")}
+function toggleSave(id){
+  let saved=storage.get("saved");
+  saved=saved.includes(id)?saved.filter(x=>x!==id):[id,...saved];
+  storage.set("saved",saved); renderLibrary(); renderSaved(); renderActivity(); toast(saved.includes(id)?"Libro guardado":"Libro eliminado");
+}
+function openBook(id){
+  $("#bookSelect").value=id; renderBook(); switchView("explorar"); window.scrollTo({top:0,behavior:"smooth"});
+}
+function switchView(view){
+  $$(".tab").forEach(x=>x.classList.toggle("active",x.dataset.view===view));
+  $$(".view").forEach(x=>x.classList.toggle("active",x.id===`view-${view}`));
+}
+function bind(){
+  $$(".tab").forEach(t=>t.addEventListener("click",()=>switchView(t.dataset.view)));
+  $("#bookSelect").addEventListener("change",renderBook);
+  $("#startSearch").addEventListener("input",e=>{
+    const q=norm(e.target.value); const match=books.find(b=>norm(`${b.title} ${b.author}`).includes(q));
+    if(match&&q.length>2){$("#bookSelect").value=match.id;renderBook();}
   });
-  localStorage.setItem("readingRoutes", JSON.stringify(history.slice(0, 8)));
-  renderSavedRoutes();
+  $("#topicChips").addEventListener("click",e=>{const b=e.target.closest("[data-topic]");if(!b)return;state.selectedTopic=b.dataset.topic;$$(".chip").forEach(x=>x.classList.toggle("active",x===b));});
+  $("#buildRoute").addEventListener("click",createRoute); $("#newRoute").addEventListener("click",createRoute);
+  $("#recommendations").addEventListener("click",e=>{
+    const b=e.target.closest("[data-action]");if(!b)return;
+    if(b.dataset.action==="save")toggleSave(b.dataset.id);
+    else{const f=storage.get("feedback");f.unshift({book:b.dataset.id,type:b.dataset.action,date:new Date().toISOString()});storage.set("feedback",f.slice(0,100));b.classList.add("selected");b.textContent="✓ Registrado";renderActivity();}
+  });
+  ["#librarySearch","#genreFilter","#topicFilter"].forEach(s=>$(s).addEventListener("input",renderLibrary));
+  document.body.addEventListener("click",e=>{const o=e.target.closest("[data-open]"),s=e.target.closest("[data-save]");if(o)openBook(o.dataset.open);if(s)toggleSave(s.dataset.save);});
+  $("#clearSaved").addEventListener("click",()=>{storage.set("saved",[]);renderSaved();renderLibrary();renderActivity();});
+  $("#exportData").addEventListener("click",()=>{
+    const data={saved:storage.get("saved"),history:storage.get("history"),feedback:storage.get("feedback")};
+    const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:"application/json"}));a.download="rutas-lectura-datos.json";a.click();
+  });
 }
-
-function renderSavedRoutes() {
-  const history = JSON.parse(localStorage.getItem("readingRoutes") || "[]");
-  const savedBooks = JSON.parse(localStorage.getItem("savedBooks") || "[]");
-
-  if (!history.length && !savedBooks.length) {
-    savedRoutes.innerHTML = `<p class="empty">Todavía no guardaste recorridos.</p>`;
-    return;
-  }
-
-  const routesHtml = history.map(route => `
-    <div class="saved-item">
-      <strong>${route.book}</strong> · ${formatLabel(route.topic)} · ${formatLabel(route.approach)}<br>
-      <small>${route.date}</small>
-    </div>
-  `).join("");
-
-  const savedHtml = savedBooks.map(book => `
-    <div class="saved-item">🔖 <strong>${book.title}</strong> — ${book.author}</div>
-  `).join("");
-
-  savedRoutes.innerHTML = savedHtml + routesHtml;
+function registerPWA(){
+  if("serviceWorker"in navigator)navigator.serviceWorker.register("./service-worker.js");
+  let deferred; window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;$("#installBtn").classList.remove("hidden")});
+  $("#installBtn").addEventListener("click",async()=>{if(!deferred)return;deferred.prompt();await deferred.userChoice;deferred=null;$("#installBtn").classList.add("hidden")});
 }
-
-bookSelect.addEventListener("change", () => {
-  renderBook();
-  recommendations.innerHTML = `<p class="empty">Selecciona un tema y crea tu ruta.</p>`;
-});
-
-topicButtons.addEventListener("click", event => {
-  const button = event.target.closest("[data-topic]");
-  if (!button) return;
-  state.selectedTopic = button.dataset.topic;
-  [...topicButtons.children].forEach(el => el.classList.toggle("active", el === button));
-});
-
-document.querySelector("#exploreBtn").addEventListener("click", buildRoute);
-document.querySelector("#refreshBtn").addEventListener("click", buildRoute);
-
-recommendations.addEventListener("click", event => {
-  const button = event.target.closest("[data-action]");
-  if (!button) return;
-
-  const item = state.currentRoute[Number(button.dataset.index)];
-  button.classList.add("selected");
-
-  if (button.dataset.action === "save") {
-    const saved = JSON.parse(localStorage.getItem("savedBooks") || "[]");
-    if (!saved.some(book => book.title === item.title)) saved.unshift(item);
-    localStorage.setItem("savedBooks", JSON.stringify(saved.slice(0, 20)));
-    button.textContent = "✓ Guardado";
-    renderSavedRoutes();
-  }
-
-  if (button.dataset.action === "useful") button.textContent = "✓ Recomendación útil";
-  if (button.dataset.action === "not-related") button.textContent = "✓ Opinión registrada";
-});
-
-window.addEventListener("beforeinstallprompt", event => {
-  event.preventDefault();
-  deferredPrompt = event;
-  installBtn.classList.remove("hidden");
-});
-
-installBtn.addEventListener("click", async () => {
-  if (!deferredPrompt) return;
-  deferredPrompt.prompt();
-  await deferredPrompt.userChoice;
-  deferredPrompt = null;
-  installBtn.classList.add("hidden");
-});
-
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => navigator.serviceWorker.register("service-worker.js"));
-}
-
-renderBookOptions();
-renderBook();
-renderSavedRoutes();
+init().catch(()=>{$("main").innerHTML='<section class="panel"><h2>Error al cargar el catálogo</h2><p>Revisa que books.json esté subido en la raíz del repositorio.</p></section>'});
