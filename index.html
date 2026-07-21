@@ -1,115 +1,64 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#30263d">
-<meta name="description" content="Explora libros, temas y perspectivas mediante rutas de lectura personalizadas.">
-<link rel="manifest" href="./manifest.json">
-<link rel="icon" href="./icon-192.png">
-<link rel="apple-touch-icon" href="./icon-192.png">
-<link rel="stylesheet" href="./styles.css">
-<title>Rutas de Lectura Pro</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#33243f">
+  <meta name="description" content="Busca libros en Google Books y Open Library y explora conexiones verificables.">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon-192.png">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Rutas de Lectura</title>
 </head>
 <body>
 <header class="topbar">
-  <div>
-    <p class="eyebrow">Biblioteca inteligente</p>
-    <h1>Rutas de Lectura</h1>
-  </div>
-  <button id="installBtn" class="ghost hidden">Instalar</button>
+  <div><p class="eyebrow">Explorador de conocimiento</p><h1>Rutas de Lectura</h1></div>
+  <div class="header-actions"><span id="networkBadge" class="status">Comprobando conexión…</span><button id="installBtn" class="ghost hidden">Instalar</button></div>
 </header>
 
 <nav class="tabs" aria-label="Secciones">
-  <button class="tab active" data-view="explorar">Explorar</button>
-  <button class="tab" data-view="biblioteca">Biblioteca</button>
+  <button class="tab active" data-view="buscar">Buscar</button>
   <button class="tab" data-view="guardados">Guardados</button>
   <button class="tab" data-view="actividad">Actividad</button>
+  <button class="tab" data-view="preferencias">Preferencias</button>
 </nav>
 
 <main>
-<section id="view-explorar" class="view active">
-  <div class="hero-card">
-    <p class="eyebrow">Comienza desde una obra</p>
-    <h2>¿Qué idea quieres seguir?</h2>
-    <p>Selecciona un libro, un tema y el tipo de perspectiva que buscas.</p>
-  </div>
-
-  <section class="panel">
-    <label for="startSearch">Buscar libro de partida</label>
-    <input id="startSearch" type="search" placeholder="Título o autor">
-    <label for="bookSelect">Libro</label>
-    <select id="bookSelect"></select>
-    <div id="bookInfo" class="book-info"></div>
+  <section id="view-buscar" class="view active">
+    <section class="hero-card">
+      <p class="eyebrow">Google Books + Open Library</p>
+      <h2>Empieza con cualquier libro</h2>
+      <p>Combinamos datos reales de ambas bibliotecas. Cada campo indica su procedencia y los datos ausentes se muestran como no disponibles.</p>
+      <form id="searchForm" class="search-row">
+        <label class="sr-only" for="searchInput">Título, autor o ISBN</label>
+        <input id="searchInput" type="search" placeholder="Ej.: 1984 George Orwell o un ISBN" minlength="2" required autocomplete="off">
+        <button class="primary" type="submit">Buscar</button>
+      </form>
+      <div class="quick-searches" aria-label="Búsquedas sugeridas">
+        <button data-query="Cien años de soledad">Cien años de soledad</button>
+        <button data-query="Ursula K. Le Guin">Ursula K. Le Guin</button>
+        <button data-query="9788497594257">Buscar por ISBN</button>
+      </div>
+    </section>
+    <div id="searchStatus" class="notice hidden" role="status"></div>
+    <section class="panel">
+      <div class="section-heading"><div><p class="eyebrow">Catálogo combinado</p><h2>Resultados</h2></div><span id="resultCount" class="muted"></span></div>
+      <div id="searchResults" class="book-grid"><p class="empty">Escribe un título, autor o ISBN para comenzar. Sin conexión puedes explorar el catálogo local.</p></div>
+    </section>
+    <section id="detailPanel" class="panel hidden" aria-live="polite"></section>
+    <section id="recommendationPanel" class="panel hidden">
+      <div class="section-heading"><div><p class="eyebrow">Conexiones verificables</p><h2>Libros relacionados</h2></div><button id="refreshRecommendations" class="ghost">Actualizar</button></div>
+      <div id="recommendations" class="book-grid"></div>
+    </section>
   </section>
 
-  <section class="panel">
-    <h2>Configura la ruta</h2>
-    <label>Tema central</label>
-    <div id="topicChips" class="chips"></div>
-
-    <label for="approachSelect">Enfoque</label>
-    <select id="approachSelect">
-      <option value="todos">Todos</option>
-      <option value="ensayo">Ensayo</option>
-      <option value="academico">Académico / divulgación</option>
-      <option value="ficcion">Ficción</option>
-      <option value="novela-historica">Novela histórica</option>
-      <option value="ciencia-ficcion">Ciencia ficción</option>
-      <option value="biografia">Biografía</option>
-    </select>
-
-    <label for="goalSelect">Objetivo</label>
-    <select id="goalSelect">
-      <option value="ampliar">Ampliar la idea</option>
-      <option value="contextualizar">Dar contexto histórico</option>
-      <option value="cuestionar">Cuestionar la perspectiva</option>
-      <option value="aplicar">Llevarla a otro campo</option>
-    </select>
-
-    <button id="buildRoute" class="primary">Crear ruta</button>
-  </section>
-
-  <section class="panel">
-    <div class="row-between">
-      <div><p class="eyebrow">Resultados</p><h2>Tu ruta</h2></div>
-      <button id="newRoute" class="ghost">Otra ruta</button>
-    </div>
-    <div id="recommendations" class="cards"><p class="empty">Crea una ruta para comenzar.</p></div>
-  </section>
-</section>
-
-<section id="view-biblioteca" class="view">
-  <section class="panel">
-    <h2>Biblioteca completa</h2>
-    <div class="stats" id="libraryStats"></div>
-    <input id="librarySearch" type="search" placeholder="Buscar título, autor o tema">
-    <div class="filters">
-      <select id="genreFilter"><option value="todos">Todos los géneros</option></select>
-      <select id="topicFilter"><option value="todos">Todos los temas</option></select>
-    </div>
-    <div id="libraryGrid" class="library-grid"></div>
-  </section>
-</section>
-
-<section id="view-guardados" class="view">
-  <section class="panel">
-    <div class="row-between"><h2>Libros guardados</h2><button id="clearSaved" class="danger-link">Vaciar</button></div>
-    <div id="savedGrid" class="library-grid"></div>
-  </section>
-</section>
-
-<section id="view-actividad" class="view">
-  <section class="panel">
-    <div class="row-between"><h2>Tu actividad</h2><button id="exportData" class="ghost">Exportar</button></div>
-    <div id="activityStats" class="stats"></div>
-    <h3>Rutas recientes</h3>
-    <div id="historyList" class="history"></div>
-  </section>
-</section>
+  <section id="view-guardados" class="view"><section class="panel"><div class="section-heading"><h2>Favoritos</h2><span id="favoriteCount" class="muted"></span></div><div id="favoritesGrid" class="book-grid"></div></section></section>
+  <section id="view-actividad" class="view"><section class="panel"><div class="section-heading"><h2>Tu actividad</h2><button id="exportData" class="ghost">Exportar datos</button></div><div id="activityStats" class="stats"></div><h3>Búsquedas recientes</h3><div id="searchHistory" class="history"></div><h3>Libros vistos</h3><div id="viewHistory" class="history"></div></section></section>
+  <section id="view-preferencias" class="view"><section class="panel"><h2>Preferencias</h2><p class="muted">Se guardan únicamente en este dispositivo.</p><form id="preferencesForm"><label for="languagePreference">Idioma preferido</label><select id="languagePreference"><option value="">Cualquier idioma</option><option value="es">Español</option><option value="en">Inglés</option><option value="pt">Portugués</option><option value="fr">Francés</option></select><label for="topicPreference">Temas favoritos</label><input id="topicPreference" placeholder="historia, ciencia, ficción"><label for="resultLimit">Cantidad de resultados</label><select id="resultLimit"><option value="10">10</option><option value="20">20</option><option value="30">30</option></select><button class="primary" type="submit">Guardar preferencias</button></form><button id="clearData" class="danger-link">Borrar todos mis datos locales</button></section></section>
 </main>
 
-<div id="toast" class="toast"></div>
+<div id="toast" class="toast" role="status"></div>
 <script src="./app.js"></script>
 </body>
 </html>

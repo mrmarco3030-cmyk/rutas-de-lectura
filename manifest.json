@@ -1,7 +1,7 @@
 {
-  "name": "Rutas de Lectura Pro",
-  "short_name": "Rutas Pro",
-  "description": "Explora libros, ideas y perspectivas mediante rutas de lectura personalizadas.",
+  "name": "Rutas de Lectura",
+  "short_name": "Rutas",
+  "description": "Busca libros en Google Books y Open Library y explora conexiones verificables.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
