@@ -2,7 +2,7 @@
 
 const GOOGLE_URL="https://www.googleapis.com/books/v1/volumes";
 const OPEN_URL="https://openlibrary.org/search.json";
-const state={local:[],results:[],selected:null,recommendations:[],controller:null};
+const state={local:[],results:[],selected:null,selectedTopic:null,objective:"contextualizar",recommendations:[],knowledge:null,controller:null};
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const clean=s=>(s??"").toString().trim();
 const norm=s=>clean(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
@@ -84,24 +84,40 @@ function fieldHTML(label,value,source){return `<div class="field"><strong>${esc(
 function renderDetail(b){
   state.selected=b;remember("views",{id:b.id,date:timestamp(),book:serializable(b)},40);const rating=store.get("ratings",{})[b.id]||0;
   $("#detailPanel").classList.remove("hidden");$("#detailPanel").innerHTML=`<div class="detail">${coverHTML(b,true)}<div><p class="eyebrow">Ficha bibliográfica</p><h2>${esc(b.title)}</h2><div class="sources">${sourcePills(b)}</div><div class="detail-list">${fieldHTML("Autores",b.authors,b.provenance.authors)}${fieldHTML("Fecha",b.date,b.provenance.date)}${fieldHTML("Editorial",b.publisher,b.provenance.publisher)}${fieldHTML("ISBN",b.isbns,b.provenance.isbns)}${fieldHTML("Idioma",b.language,b.provenance.language)}${fieldHTML("Temas / categorías",b.subjects,b.provenance.subjects)}</div></div><div class="description"><h3>Descripción</h3>${shown(b.description,b.provenance.description)}</div><div class="detail-actions"><div class="card-actions">${Object.entries(b.links||{}).filter(([,v])=>v).map(([s,v])=>`<a class="action" href="${esc(v)}" target="_blank" rel="noopener">Abrir en ${esc(sourceName(s))}</a>`).join("")}<button class="action" data-favorite="${esc(b.id)}">☆ Guardar favorito</button></div><div class="rating" aria-label="Valorar libro">${[1,2,3,4,5].map(n=>`<button data-rating="${n}" class="${n<=rating?"active":""}" aria-label="${n} estrellas">★</button>`).join("")}</div></div></div>`;
-  renderActivity();generateRecommendations(b);$("#detailPanel").scrollIntoView({behavior:"smooth",block:"start"});
+  renderActivity();prepareRecommendationBuilder(b);$("#detailPanel").scrollIntoView({behavior:"smooth",block:"start"});
 }
-async function generateRecommendations(origin){
-  $("#recommendationPanel").classList.remove("hidden");$("#recommendations").innerHTML=loadingCards();
-  const author=origin.authors?.[0],subjects=origin.subjects?.slice(0,3)||[];const queries=[];
-  if(author)queries.push(`inauthor:${author}`);subjects.forEach(s=>queries.push(s));
-  if(!queries.length){$("#recommendations").innerHTML='<p class="empty">Las fuentes no ofrecen autor ni temas suficientes para buscar relaciones reales.</p>';return}
-  try{
-    const batches=[];for(const q of queries.slice(0,3)){const found=await searchBooks(q,{recommendation:true});batches.push(...found.slice(0,8))}
-    const unique=mergeLists([batches]).filter(b=>!sameBook(b,origin)).map(b=>({b,...relationScore(origin,b)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,12);
-    state.recommendations=unique.map(x=>x.b);$("#recommendations").innerHTML=unique.length?unique.map(x=>bookCard(x.b,x.reason)).join(""):'<p class="empty">No encontramos relaciones respaldadas por autor, tema o categoría.</p>';
-  }catch(e){$("#recommendations").innerHTML=`<p class="empty">No se pudieron actualizar las recomendaciones: ${esc(e.message)}</p>`}
+const OBJECTIVES={
+  contextualizar:{label:"Contextualizar",empty:"No hay obras con el tema elegido y evidencia histórica o temporal suficiente."},
+  ampliar:{label:"Ampliar",empty:"No hay obras que compartan el tema y añadan materias nuevas verificables."},
+  cuestionar:{label:"Cuestionar",empty:"No hay obras con el tema elegido y señales explícitas de crítica, debate u oposición."},
+  ficcion:{label:"Ficción relacionada",empty:"No hay obras clasificadas como ficción que compartan el tema elegido."},
+  autor:{label:"Conocer al autor",empty:"No encontramos otras obras atribuidas al mismo autor en las fuentes."}
+};
+function mainTopics(b){const knowledgeThemes=state.knowledge?.themesFor(b)||[];return uniq([...knowledgeThemes,...(b.subjects||[])]).filter(x=>clean(x).length>2).slice(0,10)}
+function prepareRecommendationBuilder(b){
+  const topics=mainTopics(b),routePref=store.get("routePreference",{});state.selectedTopic=topics.find(t=>norm(t)===norm(routePref.topic))||topics[0]||null;state.objective=OBJECTIVES[routePref.objective]?routePref.objective:"contextualizar";
+  $("#recommendationPanel").classList.remove("hidden");$("#mainTopics").innerHTML=topics.length?topics.map(t=>`<button class="chip ${t===state.selectedTopic?"active":""}" data-main-topic="${esc(t)}">${esc(t)}</button>`).join(""):'<p class="empty">Las fuentes no proporcionan temas para este libro.</p>';
+  $$('[data-objective]').forEach(x=>x.classList.toggle("active",x.dataset.objective===state.objective));$("#recommendationTitle").textContent="Recomendaciones";$("#recommendationEyebrow").textContent="Selecciona una ruta";$("#recommendationEvidence").classList.add("hidden");$("#refreshRecommendations").classList.add("hidden");$("#recommendations").innerHTML=topics.length?'<p class="empty">Elige un tema y un objetivo para construir una ruta.</p>':'<p class="empty">Sin temas verificables no podemos generar relaciones.</p>';
 }
-function relationScore(a,b){const aa=(a.authors||[]).map(norm),ba=(b.authors||[]).map(norm),sharedAuthors=b.authors.filter((_,i)=>aa.includes(ba[i]));const as=(a.subjects||[]).map(norm),sharedSubjects=b.subjects.filter(s=>as.some(x=>x===norm(s)||x.includes(norm(s))||norm(s).includes(x))).slice(0,4);const score=sharedAuthors.length*8+sharedSubjects.length*3;const parts=[];if(sharedAuthors.length)parts.push(`mismo autor: ${sharedAuthors.join(", ")}`);if(sharedSubjects.length)parts.push(`temas compartidos: ${sharedSubjects.join(", ")}`);return {score,reason:parts.join("; ")}}
+function cachedBookForRef(ref){return [...state.results,...state.recommendations,...state.local,...store.get("favorites",[]),...store.get("views",[]).map(x=>x.book)].find(book=>state.knowledge?.matchesRef(book,ref))}
+async function resolveRelationTarget(ref){
+  const cached=cachedBookForRef(ref);if(cached)return cached;
+  const query=ref.isbn?`isbn:${ref.isbn}`:[ref.title,ref.author].filter(Boolean).join(" ");if(!query)return null;
+  const found=await searchBooks(query,{recommendation:true});return found.find(book=>state.knowledge.matchesRef(book,ref))||found[0]||null;
+}
+function knowledgeReason(item){const r=item.relation,type=item.relationType?.label||r.type,claims=(r.evidence?.claims||[]).join(" "),sources=(r.evidence?.sources||[]).map(s=>s.label||s.url).filter(Boolean).join("; ");return `Relación: ${type}. Tema compartido: ${(item.matchedThemes||r.themes).join(", ")}. Qué aporta: ${r.contribution} Explicación: ${r.explanation} Evidencia: ${claims} Fuentes de evidencia: ${sources}. Origen de la relación: ${r.provenance?.provider||"curación"}.`}
+async function generateRecommendations(origin=state.selected){
+  const topic=state.selectedTopic,objective=state.objective,meta=OBJECTIVES[objective];if(!origin||!state.knowledge||(!topic&&objective!=="autor"))return;
+  $("#recommendations").innerHTML=loadingCards();$("#recommendationTitle").textContent=meta.label;$("#recommendationEyebrow").textContent=objective==="autor"?`Autor: ${origin.authors?.[0]||"no disponible"}`:`Tema: ${topic}`;$("#recommendationEvidence").textContent="Las relaciones proceden del grafo propio y deben estar aprobadas, tipificadas y respaldadas por evidencia. Las APIs solo completan la ficha bibliográfica.";$("#recommendationEvidence").classList.remove("hidden");$("#refreshRecommendations").classList.remove("hidden");
+  const matches=state.knowledge.find(origin,{theme:topic,objective,statuses:["approved"]});
+  const resolved=[];for(const item of matches){const book=await resolveRelationTarget(item.target);if(book)resolved.push({book,item})}
+  state.recommendations=resolved.map(x=>x.book);$("#recommendations").innerHTML=resolved.length?resolved.map(x=>bookCard(x.book,knowledgeReason(x.item))).join(""):'<p class="empty">El grafo de conocimiento todavía no contiene una relación aprobada con este tema y objetivo. No mostramos similitudes calculadas por las APIs.</p>';
+  remember("routes",{id:`${Date.now()}:${origin.id}:${objective}:${norm(topic)}`,date:timestamp(),book:origin.title,bookId:origin.id,topic,objective,count:resolved.length,engine:"knowledge-graph-v1"},40);store.set("routePreference",{topic,objective});renderActivity();
+}
 
 function toggleFavorite(b){let list=store.get("favorites",[]);const exists=list.some(x=>x.id===b.id);list=exists?list.filter(x=>x.id!==b.id):[serializable(b),...list].slice(0,100);store.set("favorites",list);renderResults();renderFavorites();toast(exists?"Eliminado de favoritos":"Guardado en favoritos")}
 function renderFavorites(){const list=store.get("favorites",[]);$("#favoriteCount").textContent=`${list.length} libros`;$("#favoritesGrid").innerHTML=list.length?list.map(b=>bookCard(b)).join(""):'<p class="empty">Todavía no guardaste libros.</p>'}
-function renderActivity(){const searches=store.get("searches",[]),views=store.get("views",[]),favorites=store.get("favorites",[]),ratings=store.get("ratings",{});$("#activityStats").innerHTML=[[searches.length,"Búsquedas"],[views.length,"Vistos"],[favorites.length,"Favoritos"],[Object.keys(ratings).length,"Valorados"]].map(([n,l])=>`<div class="stat"><strong>${n}</strong>${l}</div>`).join("");$("#searchHistory").innerHTML=searches.length?searches.slice(0,10).map(x=>`<button class="history-item" data-query="${esc(x.query)}"><strong>${esc(x.query)}</strong><br><span class="meta">${new Date(x.date).toLocaleString("es-AR")}</span></button>`).join(""):'<p class="empty">Sin búsquedas todavía.</p>';$("#viewHistory").innerHTML=views.length?views.slice(0,10).map(x=>`<button class="history-item" data-open="${esc(x.book.id)}"><strong>${esc(x.book.title)}</strong><br><span class="meta">${esc(x.book.authors?.join(", ")||"")}</span></button>`).join(""):'<p class="empty">Sin libros vistos todavía.</p>'}
+function renderActivity(){const searches=store.get("searches",[]),views=store.get("views",[]),favorites=store.get("favorites",[]),routes=store.get("routes",[]);$("#activityStats").innerHTML=[[searches.length,"Búsquedas"],[views.length,"Vistos"],[favorites.length,"Favoritos"],[routes.length,"Rutas"]].map(([n,l])=>`<div class="stat"><strong>${n}</strong>${l}</div>`).join("");$("#routeHistory").innerHTML=routes.length?routes.slice(0,10).map(x=>`<div class="history-item"><strong>${esc(x.book)}</strong><br><span class="meta">${esc(x.topic||"Autor")} · ${esc(OBJECTIVES[x.objective]?.label||x.objective)} · ${x.count} resultados</span></div>`).join(""):'<p class="empty">Sin rutas todavía.</p>';$("#searchHistory").innerHTML=searches.length?searches.slice(0,10).map(x=>`<button class="history-item" data-query="${esc(x.query)}"><strong>${esc(x.query)}</strong><br><span class="meta">${new Date(x.date).toLocaleString("es-AR")}</span></button>`).join(""):'<p class="empty">Sin búsquedas todavía.</p>';$("#viewHistory").innerHTML=views.length?views.slice(0,10).map(x=>`<button class="history-item" data-open="${esc(x.book.id)}"><strong>${esc(x.book.title)}</strong><br><span class="meta">${esc(x.book.authors?.join(", ")||"")}</span></button>`).join(""):'<p class="empty">Sin libros vistos todavía.</p>'}
 function renderPreferences(){const p=preference();$("#languagePreference").value=p.language||"";$("#topicPreference").value=(p.topics||[]).join(", ");$("#resultLimit").value=String(p.limit||20)}
 function switchView(view){$$('.tab').forEach(x=>x.classList.toggle('active',x.dataset.view===view));$$('.view').forEach(x=>x.classList.toggle('active',x.id===`view-${view}`))}
 function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800)}
@@ -111,13 +127,23 @@ function bind(){
   $("#searchForm").addEventListener("submit",e=>{e.preventDefault();searchBooks($("#searchInput").value)});$$('.tab').forEach(x=>x.addEventListener('click',()=>switchView(x.dataset.view)));
   document.body.addEventListener("click",e=>{const q=e.target.closest("[data-query]"),o=e.target.closest("[data-open]"),f=e.target.closest("[data-favorite]"),r=e.target.closest("[data-rating]");if(q){$("#searchInput").value=q.dataset.query;switchView("buscar");searchBooks(q.dataset.query)}if(o){const b=lookup(o.dataset.open);if(b){switchView("buscar");renderDetail(b)}}if(f){const b=lookup(f.dataset.favorite)||state.selected;if(b)toggleFavorite(b)}if(r&&state.selected){const ratings=store.get("ratings",{});ratings[state.selected.id]=Number(r.dataset.rating);store.set("ratings",ratings);renderDetail(state.selected);toast("Valoración guardada")}});
   $("#refreshRecommendations").addEventListener("click",()=>state.selected&&generateRecommendations(state.selected));
+  $("#mainTopics").addEventListener("click",e=>{const chip=e.target.closest("[data-main-topic]");if(!chip)return;state.selectedTopic=chip.dataset.mainTopic;$$('[data-main-topic]').forEach(x=>x.classList.toggle("active",x===chip))});
+  $("#objectiveChips").addEventListener("click",e=>{const chip=e.target.closest("[data-objective]");if(!chip)return;state.objective=chip.dataset.objective;$$('[data-objective]').forEach(x=>x.classList.toggle("active",x===chip))});
+  $("#buildRecommendations").addEventListener("click",()=>generateRecommendations(state.selected));
   $("#preferencesForm").addEventListener("submit",e=>{e.preventDefault();store.set("preferences",{language:$("#languagePreference").value,topics:$("#topicPreference").value.split(",").map(clean).filter(Boolean),limit:Number($("#resultLimit").value)});toast("Preferencias guardadas")});
-  $("#exportData").addEventListener("click",()=>{const data={exportedAt:timestamp(),searches:store.get("searches",[]),views:store.get("views",[]),favorites:store.get("favorites",[]),ratings:store.get("ratings",{}),preferences:preference()};const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:"application/json"}));a.download="rutas-de-lectura-datos.json";a.click();URL.revokeObjectURL(a.href)});
+  $("#exportData").addEventListener("click",()=>{const data={exportedAt:timestamp(),searches:store.get("searches",[]),views:store.get("views",[]),routes:store.get("routes",[]),favorites:store.get("favorites",[]),ratings:store.get("ratings",{}),preferences:preference(),routePreference:store.get("routePreference",{})};const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:"application/json"}));a.download="rutas-de-lectura-datos.json";a.click();URL.revokeObjectURL(a.href)});
   $("#clearData").addEventListener("click",()=>{if(!confirm("¿Borrar historial, favoritos, valoraciones y preferencias de este dispositivo?"))return;Object.keys(localStorage).filter(k=>k.startsWith("rutas:")).forEach(k=>localStorage.removeItem(k));renderFavorites();renderActivity();renderPreferences();toast("Datos locales borrados")});
   addEventListener("online",updateNetwork);addEventListener("offline",updateNetwork);
 }
 function registerPWA(){if("serviceWorker"in navigator)navigator.serviceWorker.register("./service-worker.js");let deferred;addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;$("#installBtn").classList.remove("hidden")});$("#installBtn").addEventListener("click",async()=>{if(!deferred)return;deferred.prompt();await deferred.userChoice;deferred=null;$("#installBtn").classList.add("hidden")})}
-async function init(){try{const data=await fetch("./books.json").then(r=>{if(!r.ok)throw Error();return r.json()});state.local=data.map(fromLocal)}catch{state.local=[]}bind();renderFavorites();renderActivity();renderPreferences();updateNetwork();registerPWA();if(!navigator.onLine){state.results=state.local.slice(0,20);renderResults();setNotice("Sin conexión: se muestra el catálogo local de respaldo.")}}
+function submitKnowledgeProposal(input,provenance={}){if(!state.knowledge)throw new Error("El motor de conocimiento no está listo");const relation=state.knowledge.propose(input,{provider:"user",...provenance});const pending=state.knowledge.export({statuses:["proposed"]}).relations;store.set("knowledgeContributions",pending);return relation}
+function registerKnowledgeProvider(provider){if(!state.knowledge)throw new Error("El motor de conocimiento no está listo");state.knowledge.registerProvider(provider)}
+async function init(){
+  try{const data=await fetch("./books.json").then(r=>{if(!r.ok)throw Error();return r.json()});state.local=data.map(fromLocal)}catch{state.local=[]}
+  try{const knowledge=await fetch("./knowledge-base.json").then(r=>{if(!r.ok)throw Error();return r.json()});state.knowledge=KnowledgeEngine.create(knowledge);state.knowledge.ingest(store.get("knowledgeContributions",[]),"user-local")}catch{state.knowledge=KnowledgeEngine.create({schemaVersion:1,relationTypes:[],relations:[]})}
+  bind();renderFavorites();renderActivity();renderPreferences();updateNetwork();registerPWA();if(!navigator.onLine){state.results=state.local.slice(0,20);renderResults();setNotice("Sin conexión: se muestra el catálogo local y el grafo de conocimiento guardado.")}
+}
 
-window.RutasInternals={fromGoogle,fromOpen,fromLocal,mergeBook,mergeLists,sameBook,relationScore,norm};
+window.RutasInternals={fromGoogle,fromOpen,fromLocal,mergeBook,mergeLists,sameBook,mainTopics,norm};
+window.RutasKnowledge={submitProposal:submitKnowledgeProposal,registerProvider:registerKnowledgeProvider,getEngine:()=>state.knowledge};
 if(typeof document!=="undefined")init();
