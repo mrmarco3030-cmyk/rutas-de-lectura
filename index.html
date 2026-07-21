@@ -48,17 +48,31 @@
     </section>
     <section id="detailPanel" class="panel hidden" aria-live="polite"></section>
     <section id="recommendationPanel" class="panel hidden">
-      <div class="section-heading"><div><p class="eyebrow">Conexiones verificables</p><h2>Libros relacionados</h2></div><button id="refreshRecommendations" class="ghost">Actualizar</button></div>
-      <div id="recommendations" class="book-grid"></div>
+      <div><p class="eyebrow">Ruta con evidencia</p><h2>¿Qué quieres explorar?</h2></div>
+      <div class="route-builder">
+        <div><h3>1. Elige un tema principal</h3><div id="mainTopics" class="chips"></div></div>
+        <div><h3>2. Elige un objetivo</h3><div id="objectiveChips" class="chips" role="radiogroup" aria-label="Objetivo de exploración">
+          <button class="chip active" data-objective="contextualizar">Contextualizar</button>
+          <button class="chip" data-objective="ampliar">Ampliar</button>
+          <button class="chip" data-objective="cuestionar">Cuestionar</button>
+          <button class="chip" data-objective="ficcion">Ficción relacionada</button>
+          <button class="chip" data-objective="autor">Conocer al autor</button>
+        </div></div>
+        <button id="buildRecommendations" class="primary">Crear recomendaciones</button>
+      </div>
+      <div class="section-heading recommendation-heading"><div><p id="recommendationEyebrow" class="eyebrow">Selecciona una ruta</p><h2 id="recommendationTitle">Recomendaciones</h2></div><button id="refreshRecommendations" class="ghost hidden">Actualizar</button></div>
+      <div id="recommendationEvidence" class="notice hidden"></div>
+      <div id="recommendations" class="book-grid"><p class="empty">Selecciona un tema y un objetivo. Solo mostraremos relaciones respaldadas por datos de las fuentes.</p></div>
     </section>
   </section>
 
   <section id="view-guardados" class="view"><section class="panel"><div class="section-heading"><h2>Favoritos</h2><span id="favoriteCount" class="muted"></span></div><div id="favoritesGrid" class="book-grid"></div></section></section>
-  <section id="view-actividad" class="view"><section class="panel"><div class="section-heading"><h2>Tu actividad</h2><button id="exportData" class="ghost">Exportar datos</button></div><div id="activityStats" class="stats"></div><h3>Búsquedas recientes</h3><div id="searchHistory" class="history"></div><h3>Libros vistos</h3><div id="viewHistory" class="history"></div></section></section>
+  <section id="view-actividad" class="view"><section class="panel"><div class="section-heading"><h2>Tu actividad</h2><button id="exportData" class="ghost">Exportar datos</button></div><div id="activityStats" class="stats"></div><h3>Rutas exploradas</h3><div id="routeHistory" class="history"></div><h3>Búsquedas recientes</h3><div id="searchHistory" class="history"></div><h3>Libros vistos</h3><div id="viewHistory" class="history"></div></section></section>
   <section id="view-preferencias" class="view"><section class="panel"><h2>Preferencias</h2><p class="muted">Se guardan únicamente en este dispositivo.</p><form id="preferencesForm"><label for="languagePreference">Idioma preferido</label><select id="languagePreference"><option value="">Cualquier idioma</option><option value="es">Español</option><option value="en">Inglés</option><option value="pt">Portugués</option><option value="fr">Francés</option></select><label for="topicPreference">Temas favoritos</label><input id="topicPreference" placeholder="historia, ciencia, ficción"><label for="resultLimit">Cantidad de resultados</label><select id="resultLimit"><option value="10">10</option><option value="20">20</option><option value="30">30</option></select><button class="primary" type="submit">Guardar preferencias</button></form><button id="clearData" class="danger-link">Borrar todos mis datos locales</button></section></section>
 </main>
 
 <div id="toast" class="toast" role="status"></div>
+<script src="./knowledge-engine.js"></script>
 <script src="./app.js"></script>
 </body>
 </html>

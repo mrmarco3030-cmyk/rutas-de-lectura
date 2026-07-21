@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "relationTypes": [
+    {"id":"amplia","label":"Amplía","objectives":["ampliar"]},
+    {"id":"contextualiza","label":"Contextualiza","objectives":["contextualizar"]},
+    {"id":"cuestiona","label":"Cuestiona","objectives":["cuestionar"]},
+    {"id":"inspira","label":"Inspira","objectives":["ampliar","ficcion"]},
+    {"id":"responde","label":"Responde","objectives":["ampliar","cuestionar"]},
+    {"id":"misma_problematica","label":"Misma problemática","objectives":["ampliar","ficcion"]},
+    {"id":"mismo_periodo_historico","label":"Mismo período histórico","objectives":["contextualizar"]},
+    {"id":"mismo_autor","label":"Mismo autor","objectives":["autor"]},
+    {"id":"biografia_autor","label":"Biografía del autor","objectives":["autor","contextualizar"]},
+    {"id":"adaptacion","label":"Adaptación","objectives":["ficcion"]}
+  ],
+  "relations": [
+    {
+      "id":"orwell-1984-rebelion","type":"mismo_autor","direction":"bidirectional","status":"approved","confidence":1,
+      "from":{"localId":"1984","title":"1984","author":"George Orwell"},"to":{"localId":"rebelion-granja","title":"Rebelión en la granja","author":"George Orwell"},
+      "themes":["poder","totalitarismo","propaganda"],"explanation":"Ambas obras fueron escritas por George Orwell y examinan mecanismos de poder y control político mediante formas narrativas diferentes.","contribution":"Permite conocer cómo el mismo autor trabaja una problemática política en una distopía y en una fábula alegórica.",
+      "evidence":{"claims":["George Orwell figura como autor de ambas obras.","Las dos relaciones temáticas están registradas en la curación editorial."],"sources":[{"kind":"bibliographic","label":"Metadatos bibliográficos de 1984"},{"kind":"bibliographic","label":"Metadatos bibliográficos de Rebelión en la granja"}]},"provenance":{"provider":"manual","curator":"Rutas de Lectura","createdAt":"2026-07-20"}
+    },
+    {
+      "id":"1984-origenes-totalitarismo","type":"contextualiza","direction":"forward","status":"approved","confidence":0.92,
+      "from":{"localId":"1984","title":"1984","author":"George Orwell"},"to":{"localId":"origenes-totalitarismo","title":"Los orígenes del totalitarismo","author":"Hannah Arendt"},
+      "themes":["totalitarismo","poder","sociedad"],"explanation":"Relaciona la representación ficticia de un régimen totalitario con un estudio histórico y político del totalitarismo.","contribution":"Aporta contexto conceptual e histórico para analizar las instituciones de control representadas en la novela.",
+      "evidence":{"claims":["La obra de Arendt estudia el totalitarismo como fenómeno político.","1984 representa un Estado totalitario ficticio."],"sources":[{"kind":"curated","label":"Ficha temática de 1984"},{"kind":"curated","label":"Ficha temática de Los orígenes del totalitarismo"}]},"provenance":{"provider":"manual","curator":"Rutas de Lectura","createdAt":"2026-07-20"}
+    },
+    {
+      "id":"1984-vigilar-castigar","type":"amplia","direction":"forward","status":"approved","confidence":0.9,
+      "from":{"localId":"1984","title":"1984","author":"George Orwell"},"to":{"localId":"vigilar-castigar","title":"Vigilar y castigar","author":"Michel Foucault"},
+      "themes":["vigilancia","poder","control social"],"explanation":"La novela representa vigilancia estatal; el ensayo estudia históricamente tecnologías disciplinarias y formas de vigilancia.","contribution":"Amplía el tema desde la ficción política hacia un análisis histórico y filosófico de la disciplina.",
+      "evidence":{"claims":["La vigilancia es un mecanismo central en 1984.","Vigilar y castigar analiza instituciones y técnicas disciplinarias."],"sources":[{"kind":"curated","label":"Ficha temática de 1984"},{"kind":"curated","label":"Ficha temática de Vigilar y castigar"}]},"provenance":{"provider":"manual","curator":"Rutas de Lectura","createdAt":"2026-07-20"}
+    },
+    {
+      "id":"1984-mundo-feliz","type":"misma_problematica","direction":"bidirectional","status":"approved","confidence":0.88,
+      "from":{"localId":"1984","title":"1984","author":"George Orwell"},"to":{"localId":"mundo-feliz","title":"Un mundo feliz","author":"Aldous Huxley"},
+      "themes":["distopía","control social","libertad"],"explanation":"Las dos novelas construyen sociedades distópicas que restringen la autonomía mediante mecanismos diferentes.","contribution":"Permite comparar modelos de control basados en coerción, condicionamiento y organización social.",
+      "evidence":{"claims":["Ambas obras están clasificadas como ficción distópica en la curación editorial."],"sources":[{"kind":"curated","label":"Fichas temáticas de 1984 y Un mundo feliz"}]},"provenance":{"provider":"manual","curator":"Rutas de Lectura","createdAt":"2026-07-20"}
+    },
+    {
+      "id":"camus-extranjero-mito","type":"mismo_autor","direction":"bidirectional","status":"approved","confidence":1,
+      "from":{"localId":"extranjero","title":"El extranjero","author":"Albert Camus"},"to":{"localId":"mito-sisifo","title":"El mito de Sísifo","author":"Albert Camus"},
+      "themes":["absurdo","existencia","sentido"],"explanation":"Las dos obras pertenecen a Albert Camus y abordan el absurdo desde la novela y el ensayo.","contribution":"Muestra cómo el autor desarrolla una misma preocupación en dos géneros distintos.",
+      "evidence":{"claims":["Albert Camus figura como autor de ambas obras."],"sources":[{"kind":"bibliographic","label":"Metadatos bibliográficos de ambas obras"}]},"provenance":{"provider":"manual","curator":"Rutas de Lectura","createdAt":"2026-07-20"}
+    },
+    {
+      "id":"sapiens-homo-deus","type":"mismo_autor","direction":"bidirectional","status":"approved","confidence":1,
+      "from":{"localId":"sapiens","title":"Sapiens","author":"Yuval Noah Harari"},"to":{"localId":"homo-deus","title":"Homo Deus","author":"Yuval Noah Harari"},
+      "themes":["humanidad","historia","futuro"],"explanation":"Ambos ensayos son de Yuval Noah Harari; uno recorre el pasado humano y el otro explora posibles trayectorias futuras.","contribution":"Permite seguir al autor desde una síntesis histórica hacia sus hipótesis sobre el futuro.",
+      "evidence":{"claims":["Yuval Noah Harari figura como autor de ambas obras."],"sources":[{"kind":"bibliographic","label":"Metadatos bibliográficos de Sapiens y Homo Deus"}]},"provenance":{"provider":"manual","curator":"Rutas de Lectura","createdAt":"2026-07-20"}
+    },
+    {
+      "id":"dostoievski-crimen-hermanos","type":"mismo_autor","direction":"bidirectional","status":"approved","confidence":1,
+      "from":{"localId":"crimen-castigo","title":"Crimen y castigo","author":"Fiódor Dostoievski"},"to":{"localId":"hermanos-karamazov","title":"Los hermanos Karamázov","author":"Fiódor Dostoievski"},
+      "themes":["moral","culpa","fe","justicia"],"explanation":"Dos novelas de Fiódor Dostoievski que examinan responsabilidad moral, culpa y justicia.","contribution":"Amplía el conocimiento del autor y permite comparar el tratamiento narrativo de dilemas morales.",
+      "evidence":{"claims":["Fiódor Dostoievski figura como autor de ambas obras."],"sources":[{"kind":"bibliographic","label":"Metadatos bibliográficos de ambas novelas"}]},"provenance":{"provider":"manual","curator":"Rutas de Lectura","createdAt":"2026-07-20"}
+    },
+    {
+      "id":"asimov-fundacion-robot","type":"mismo_autor","direction":"bidirectional","status":"approved","confidence":1,
+      "from":{"localId":"fundacion","title":"Fundación","author":"Isaac Asimov"},"to":{"localId":"yo-robot","title":"Yo, robot","author":"Isaac Asimov"},
+      "themes":["tecnología","sociedad","futuro"],"explanation":"Dos obras de Isaac Asimov que exploran relaciones entre conocimiento, tecnología y organización social.","contribution":"Permite conocer dos vertientes de la ciencia ficción del mismo autor.",
+      "evidence":{"claims":["Isaac Asimov figura como autor de ambas obras."],"sources":[{"kind":"bibliographic","label":"Metadatos bibliográficos de Fundación y Yo, robot"}]},"provenance":{"provider":"manual","curator":"Rutas de Lectura","createdAt":"2026-07-20"}
+    },
+    {
+      "id":"leguin-mano-desposeidos","type":"mismo_autor","direction":"bidirectional","status":"approved","confidence":1,
+      "from":{"localId":"mano-izquierda-oscuridad","title":"La mano izquierda de la oscuridad","author":"Ursula K. Le Guin"},"to":{"localId":"desposeidos","title":"Los desposeídos","author":"Ursula K. Le Guin"},
+      "themes":["sociedad","política","identidad"],"explanation":"Dos novelas de Ursula K. Le Guin que emplean sociedades imaginarias para explorar organización política e identidad.","contribution":"Permite comparar cómo la autora usa mundos ficticios para examinar instituciones sociales.",
+      "evidence":{"claims":["Ursula K. Le Guin figura como autora de ambas obras."],"sources":[{"kind":"bibliographic","label":"Metadatos bibliográficos de ambas novelas"}]},"provenance":{"provider":"manual","curator":"Rutas de Lectura","createdAt":"2026-07-20"}
+    },
+    {
+      "id":"borges-ficciones-aleph","type":"mismo_autor","direction":"bidirectional","status":"approved","confidence":1,
+      "from":{"localId":"ficciones","title":"Ficciones","author":"Jorge Luis Borges"},"to":{"localId":"aleph","title":"El Aleph","author":"Jorge Luis Borges"},
+      "themes":["infinito","tiempo","realidad","libros"],"explanation":"Dos colecciones de Jorge Luis Borges que comparten preocupaciones sobre infinito, tiempo, realidad y literatura.","contribution":"Permite profundizar en motivos recurrentes del mismo autor a través de relatos diferentes.",
+      "evidence":{"claims":["Jorge Luis Borges figura como autor de ambas obras."],"sources":[{"kind":"bibliographic","label":"Metadatos bibliográficos de Ficciones y El Aleph"}]},"provenance":{"provider":"manual","curator":"Rutas de Lectura","createdAt":"2026-07-20"}
+    }
+  ]
+}
